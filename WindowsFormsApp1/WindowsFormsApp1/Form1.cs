@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
 
             BackColor = Color.FromArgb(244, 247, 252);
             MinimumSize = new Size(360, 640);
-            Text = "ToDo List";
+            Text = "ToDo List Scloud";
             StartPosition = FormStartPosition.CenterScreen;
 
             _contentPanel = new FlowLayoutPanel
@@ -113,7 +113,13 @@ namespace WindowsFormsApp1
                 UseVisualStyleBackColor = false
             };
             _clearTaskButton.FlatAppearance.BorderSize = 0;
-            _clearTaskButton.Click += (sender, args) => _newTaskTextBox.Clear();
+            _clearTaskButton.MouseEnter += (sender, args) => { _inputHovered = true; UpdateClearButtonVisibility(); };
+            _clearTaskButton.MouseLeave += (sender, args) => { _inputHovered = false; UpdateClearButtonVisibility(); };
+            _clearTaskButton.Click += (sender, args) =>
+            {
+                _newTaskTextBox.Clear();
+                _newTaskTextBox.Focus();
+            };
 
             Controls.Add(_contentPanel);
 
@@ -199,6 +205,8 @@ namespace WindowsFormsApp1
                 Height = 64,
                 Location = new Point(0, 48)
             };
+            inputCard.MouseEnter += (sender, args) => { _inputHovered = true; UpdateClearButtonVisibility(); };
+            inputCard.MouseLeave += (sender, args) => { _inputHovered = false; UpdateClearButtonVisibility(); };
 
             var addButton = new Button
             {
